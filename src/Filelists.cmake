@@ -52,7 +52,9 @@ set(lwipcore_SRCS
     ${LWIP_DIR}/src/core/tcp_out.c
     ${LWIP_DIR}/src/core/timeouts.c
     ${LWIP_DIR}/src/core/udp.c
+    ${LWIP_DIR}/src/core/arch/sys_arch.cpp
 )
+
 set(lwipcore4_SRCS
     ${LWIP_DIR}/src/core/ipv4/autoip.c
     ${LWIP_DIR}/src/core/ipv4/dhcp.c
@@ -242,6 +244,10 @@ set(lwipallapps_SRCS
     ${lwipmqtt_SRCS}
     ${lwipmbedtls_SRCS}
 )
+
+# Yeah... We really need some C++.
+set_source_files_properties(${lwipnoapps_SRCS} PROPERTIES LANGUAGE CXX)
+set_source_files_properties(${lwipallapps_SRCS} PROPERTIES LANGUAGE CXX)
 
 # Generate lwip/init.h (version info)
 configure_file(${LWIP_DIR}/src/include/lwip/init.h.cmake.in ${LWIP_DIR}/src/include/lwip/init.h)
