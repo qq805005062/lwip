@@ -51,6 +51,14 @@
 #include "lwip/ip6.h"
 #include "lwip/ip6_addr.h"
 
+/*
+ *
+ * Hack: C++, yes!
+ *
+ */
+#include <functional>
+#include <type_traits>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -228,7 +236,12 @@ struct tcp_pcb_listen {
 
 #if LWIP_CALLBACK_API
   /* Function to call when a listener has been connected. */
-  tcp_accept_fn accept;
+  /*
+   *
+   * Hack : C++, yes!
+   *
+   */
+  std::function<std::remove_pointer_t<tcp_accept_fn>> accept;
 #endif /* LWIP_CALLBACK_API */
 
 #if TCP_LISTEN_BACKLOG
@@ -351,7 +364,12 @@ struct tcp_pcb {
   /* Function to be called when more send buffer space is available. */
   tcp_sent_fn sent;
   /* Function to be called when (in-sequence) data has arrived. */
-  tcp_recv_fn recv;
+  /*
+   *
+   * Hack : C++, yes!
+   *
+   */
+  std::function<std::remove_pointer_t<tcp_recv_fn>> recv;
   /* Function to be called when a connection has been set up. */
   tcp_connected_fn connected;
   /* Function which is called periodically. */
