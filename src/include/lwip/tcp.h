@@ -439,7 +439,12 @@ void             tcp_arg     (struct tcp_pcb *pcb, void *arg);
 void             tcp_recv    (struct tcp_pcb *pcb, std::function<std::remove_pointer_t<tcp_recv_fn>> recv);
 void             tcp_sent    (struct tcp_pcb *pcb, tcp_sent_fn sent);
 void             tcp_err     (struct tcp_pcb *pcb, tcp_err_fn err);
-void             tcp_accept  (struct tcp_pcb *pcb, tcp_accept_fn accept);
+/*
+ *
+ *  Hack : C++, yes!
+ *
+ */
+void             tcp_accept  (struct tcp_pcb *pcb, std::function<std::remove_pointer_t<tcp_accept_fn>> accept);
 #endif /* LWIP_CALLBACK_API */
 void             tcp_poll    (struct tcp_pcb *pcb, tcp_poll_fn poll, u8_t interval);
 
