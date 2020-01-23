@@ -431,7 +431,12 @@ struct tcp_pcb * tcp_new_ip_type (u8_t type);
 
 void             tcp_arg     (struct tcp_pcb *pcb, void *arg);
 #if LWIP_CALLBACK_API
-void             tcp_recv    (struct tcp_pcb *pcb, tcp_recv_fn recv);
+/*
+ *
+ *  Hack : C++, yes!
+ *
+ */
+void             tcp_recv    (struct tcp_pcb *pcb, std::function<std::remove_pointer_t<tcp_recv_fn>> recv);
 void             tcp_sent    (struct tcp_pcb *pcb, tcp_sent_fn sent);
 void             tcp_err     (struct tcp_pcb *pcb, tcp_err_fn err);
 void             tcp_accept  (struct tcp_pcb *pcb, tcp_accept_fn accept);
