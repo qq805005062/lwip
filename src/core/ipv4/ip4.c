@@ -1032,12 +1032,19 @@ ip4_output(struct pbuf *p, const ip4_addr_t *src, const ip4_addr_t *dest,
 
   LWIP_IP_CHECK_PBUF_REF_COUNT_FOR_TX(p);
 
-  if ((netif = ip4_route_src(src, dest)) == NULL) {
-    LWIP_DEBUGF(IP_DEBUG, ("ip4_output: No route to %"U16_F".%"U16_F".%"U16_F".%"U16_F"\n",
-                           ip4_addr1_16(dest), ip4_addr2_16(dest), ip4_addr3_16(dest), ip4_addr4_16(dest)));
-    IP_STATS_INC(ip.rterr);
-    return ERR_RTE;
-  }
+  /*
+   *
+   *  Hack : Never route!
+   *
+   */
+  netif = netif_list;
+
+//  if ((netif = ip4_route_src(src, dest)) == NULL) {
+//    LWIP_DEBUGF(IP_DEBUG, ("ip4_output: No route to %"U16_F".%"U16_F".%"U16_F".%"U16_F"\n",
+//                           ip4_addr1_16(dest), ip4_addr2_16(dest), ip4_addr3_16(dest), ip4_addr4_16(dest)));
+//    IP_STATS_INC(ip.rterr);
+//    return ERR_RTE;
+//  }
 
   return ip4_output_if(p, src, dest, ttl, tos, proto, netif);
 }
