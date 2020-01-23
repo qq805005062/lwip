@@ -314,6 +314,10 @@ tcp_input(struct pbuf *p, struct netif *inp)
 
     /* Finally, if we still did not get a match, we check all PCBs that
        are LISTENing for incoming connections. */
+    /*
+     * Hack : Yes, we let the pcb listen all connections.
+     *
+     * */
     prev = NULL;
     lpcb = tcp_listen_pcbs.listen_pcbs;
     prev = (struct tcp_pcb *)lpcb;
