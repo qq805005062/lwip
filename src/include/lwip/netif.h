@@ -287,6 +287,12 @@ struct netif {
    *  to pass a packet up the TCP/IP stack. */
   netif_input_fn input;
 #if LWIP_IPV4
+  /*
+   *
+   * Hack : Save essential args here.
+   *
+   */
+  void* callback_arg;
   /** This function is called by the IP module when it wants
    *  to send a packet on the interface. This function typically
    *  first resolves the hardware address, then sends the packet.
