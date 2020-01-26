@@ -51,14 +51,6 @@
 #include "lwip/ip6.h"
 #include "lwip/ip6_addr.h"
 
-/*
- *
- * Hack: C++, yes!
- *
- */
-#include <functional>
-#include <type_traits>
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -236,12 +228,7 @@ struct tcp_pcb_listen {
 
 #if LWIP_CALLBACK_API
   /* Function to call when a listener has been connected. */
-  /*
-   *
-   * Hack : C++, yes!
-   *
-   */
-  std::function<std::remove_pointer_t<tcp_accept_fn>> accept;
+  tcp_accept_fn accept;
 #endif /* LWIP_CALLBACK_API */
 
 #if TCP_LISTEN_BACKLOG
@@ -364,12 +351,7 @@ struct tcp_pcb {
   /* Function to be called when more send buffer space is available. */
   tcp_sent_fn sent;
   /* Function to be called when (in-sequence) data has arrived. */
-  /*
-   *
-   * Hack : C++, yes!
-   *
-   */
-  std::function<std::remove_pointer_t<tcp_recv_fn>> recv;
+  tcp_recv_fn recv;
   /* Function to be called when a connection has been set up. */
   tcp_connected_fn connected;
   /* Function which is called periodically. */
@@ -431,20 +413,10 @@ struct tcp_pcb * tcp_new_ip_type (u8_t type);
 
 void             tcp_arg     (struct tcp_pcb *pcb, void *arg);
 #if LWIP_CALLBACK_API
-/*
- *
- *  Hack : C++, yes!
- *
- */
-void             tcp_recv    (struct tcp_pcb *pcb, std::function<std::remove_pointer_t<tcp_recv_fn>> recv);
+void             tcp_recv    (struct tcp_pcb *pcb, tcp_recv_fn recv);
 void             tcp_sent    (struct tcp_pcb *pcb, tcp_sent_fn sent);
 void             tcp_err     (struct tcp_pcb *pcb, tcp_err_fn err);
-/*
- *
- *  Hack : C++, yes!
- *
- */
-void             tcp_accept  (struct tcp_pcb *pcb, std::function<std::remove_pointer_t<tcp_accept_fn>> accept);
+void             tcp_accept  (struct tcp_pcb *pcb, tcp_accept_fn accept);
 #endif /* LWIP_CALLBACK_API */
 void             tcp_poll    (struct tcp_pcb *pcb, tcp_poll_fn poll, u8_t interval);
 

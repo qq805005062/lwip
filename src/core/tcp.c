@@ -906,7 +906,6 @@ tcp_listen_with_backlog_and_err(struct tcp_pcb *pcb, u8_t backlog, err_t *err)
 #endif
   tcp_free(pcb);
 #if LWIP_CALLBACK_API
-  new ((char*)&lpcb->accept) decltype(lpcb->accept)();
   lpcb->accept = tcp_accept_null;
 #endif /* LWIP_CALLBACK_API */
 #if TCP_LISTEN_BACKLOG
@@ -2012,7 +2011,7 @@ tcp_arg(struct tcp_pcb *pcb, void *arg)
  * @param recv callback function to call for this pcb when data is received
  */
 void
-tcp_recv(struct tcp_pcb *pcb, std::function<std::remove_pointer_t<tcp_recv_fn>> recv)
+tcp_recv(struct tcp_pcb *pcb, tcp_recv_fn recv)
 {
   LWIP_ASSERT_CORE_LOCKED();
   if (pcb != NULL) {
@@ -2078,7 +2077,7 @@ tcp_err(struct tcp_pcb *pcb, tcp_err_fn err)
  *        connection has been connected to another host
  */
 void
-tcp_accept(struct tcp_pcb *pcb, std::function<std::remove_pointer_t<tcp_accept_fn>> accept)
+tcp_accept(struct tcp_pcb *pcb, tcp_accept_fn accept)
 {
   LWIP_ASSERT_CORE_LOCKED();
   if ((pcb != NULL) && (pcb->state == LISTEN)) {
