@@ -245,10 +245,6 @@ set(lwipallapps_SRCS
     ${lwipmbedtls_SRCS}
 )
 
-# Yeah... We really need some C++.
-set_source_files_properties(${lwipnoapps_SRCS} PROPERTIES LANGUAGE CXX)
-set_source_files_properties(${lwipallapps_SRCS} PROPERTIES LANGUAGE CXX)
-
 # Generate lwip/init.h (version info)
 configure_file(${LWIP_DIR}/src/include/lwip/init.h.cmake.in ${LWIP_DIR}/src/include/lwip/init.h)
 
