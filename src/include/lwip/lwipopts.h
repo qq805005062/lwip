@@ -35,12 +35,14 @@
 /*
         What's wrong with my program???
 */
+/*
 #define LWIP_DEBUG 1
 #define LWIP_DBG_MIN_LEVEL  LWIP_DBG_LEVEL_ALL
 #define TCP_DEBUG LWIP_DBG_ON
 #define TCP_OUTPUT_DEBUG LWIP_DBG_ON
 #define TCP_INPUT_DEBUG LWIP_DBG_ON
 #define MEM_DEBUG LWIP_DBG_ON
+*/
 
 /*
         Memory management.
