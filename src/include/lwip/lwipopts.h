@@ -50,6 +50,13 @@
 #define MEM_SIZE 2048000
 
 /*
+ * Bigger TCP_MSS.
+ * Note: avoid redefinition in /usr/include/netinet/tcp.h.
+ */
+#ifndef TCP_MSS
+#define TCP_MSS 1460
+#endif
+/*
         Internal pools
 */
 #define MEMP_NUM_PBUF 8192
