@@ -56,6 +56,11 @@
 #ifndef TCP_MSS
 #define TCP_MSS 1460
 #endif
+
+/*
+ * Allocate much more sending buffer.
+ */
+#define TCP_SND_BUF (48 * TCP_MSS)
 /*
         Internal pools
 */
