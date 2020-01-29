@@ -47,7 +47,7 @@
 /*
         Memory management.
 */
-#define MEM_SIZE 2048000
+#define MEM_LIBC_MALLOC 1
 
 /*
  * Bigger TCP_MSS.
