@@ -1,8 +1,20 @@
 #include "lwip/sys.h"
 #include <chrono>
+#include <mutex>
 
 static std::chrono::time_point<std::chrono::steady_clock> sys_start_time;
 static bool initialized = false;
+static std::recursive_mutex mtx;
+
+
+sys_prot_t sys_arch_protect(void){
+    mtx.lock();
+    return 0;
+}
+void sys_arch_unprotect(sys_prot_t pval){
+    (void)pval;
+    mtx.unlock();
+}
 
 void sys_init(void) {
     initialized = true;
