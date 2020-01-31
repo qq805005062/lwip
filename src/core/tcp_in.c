@@ -320,7 +320,6 @@ tcp_input(struct pbuf *p, struct netif *inp)
      * */
     prev = NULL;
     lpcb = tcp_listen_pcbs.listen_pcbs;
-    prev = (struct tcp_pcb *)lpcb;
 //    for (lpcb = tcp_listen_pcbs.listen_pcbs; lpcb != NULL; lpcb = lpcb->next) {
 //      /* check if PCB is bound to specific netif */
 //      if ((lpcb->netif_idx != NETIF_NO_INDEX) &&
